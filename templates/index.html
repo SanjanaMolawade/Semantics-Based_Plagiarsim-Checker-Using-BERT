@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ABSOLUTE Plagiarism Checker</title>
+    <style>
+        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #1e3a5f; /* Deep blue background */
+            color: #ffffff; /* White text color for contrast */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ff8c00; /* Orange header background */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: relative; /* Added for absolute positioning of the logo */
+        }
+        header img {
+            border-radius: 58%;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            height: 70px;
+        }
+        header .logo {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Main Section Styles */
+        .main-section {
+            background-color: #002244; /* Darker blue for contrast */
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .main-section h2 {
+            color: #ff8c00; /* Orange for titles */
+            font-size: 24px;
+        }
+
+        .main-section p {
+            font-size: 14px;
+            color: #ffffff; /* White for readability */
+        }
+        .main-section .input-container {
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center children horizontally */
+            margin-top: 20px; /* Add some margin to the top */
+        }
+        .main-section textarea {
+            width: 90%;
+            max-width: 600px;
+            height: 150px;
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 14px;
+            font-family: 'Press Start 2P', cursive;
+            border: 2px solid #ff8c00; /* Orange border */
+            background-color: #fff;
+            color: #000;
+            margin-bottom: 20px; /* Add space below the textarea */
+            box-sizing: border-box; /* Include padding and border in the total width and height */
+        }
+
+        .check-button {
+            background-color: #ff8c00; /* Orange button background */
+            color: #fff;
+            border: 2px solid #ffffff;
+            padding: 15px 30px;
+            font-size: 10px;
+            font-family: 'Press Start 2P', Bold;
+            cursor: pointer;
+            display: inline-flex; /* Corrected to inline-flex */
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .check-button:hover {
+            background-color: #9c4002; /* Slightly darker orange on hover */
+        }
+
+        /* Results Section */
+        .result {
+            margin-top: 20px;
+            text-align: left; /* Align text to the left */
+            color: #ffffff; /* White text for readability */
+            display: none; /* Hide results initially */
+        }
+
+        /* Features Section Styles */
+        .features {
+            background-color: #1e3a5f; /* Deep blue for features background */
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 24px;
+            color: #ff8c00; /* Orange for titles */
+        }
+
+        .feature-list {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            width: 30%;
+            background-color: #002244; /* Dark blue background */
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff8c00; /* Orange border */
+            margin: 10px;
+        }
+
+        .feature-item h3 {
+            color: #ff8c00; /* Orange for headings */
+            margin-bottom: 10px;
+        }
+
+        /* How It Works Section Styles */
+        .how-it-works {
+            background-color: #002244; /* Darker blue background */
+            padding: 50px 0;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .how-it-works h2 {
+            color: #ff8c00; /* Orange for titles */
+        }
+
+        .how-it-works ol {
+            list-style: none;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .how-it-works ol li {
+            background-color: #1e3a5f; /* Deep blue background */
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ff8c00; /* Orange border */
+        }
+
+        /* Testimonials Section Styles */
+        .testimonials {
+            background-color: #1e3a5f; /* Deep blue background */
+            padding: 50px 0;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .testimonials h2 {
+            color: #ff8c00; /* Orange for titles */
+        }
+
+        .testimonial-item {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #002244; /* Darker blue background */
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff8c00; /* Orange border */
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #002244; /* Darker blue background */
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        footer ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        footer ul li a {
+            color: #ff8c00; /* Orange for links */
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="{{ url_for('static', filename='dragon ball.png') }}" alt="Logo">
+         <!-- Ensure your logo is Dragon Ball-themed -->
+        <div class="container">
+            <h1 class="logo">Plagiarism Checker</h1>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <div class="container">
+            <h2>Check Your Content for Plagiarism</h2>
+            <p>Our advanced plagiarism checker helps you ensure your content is original and free from plagiarism.</p>
+            <div class="input-container">
+                <!-- Update form to send data to Flask -->
+                <form id="plagiarism-form">
+                    <textarea name="text" class="input-textarea" placeholder="INSERT TEXT INSIDE ME >.<..."></textarea>
+                    <button type="submit" class="check-button">Check for Plagiarism</button>
+                </form>
+            </div>
+            <!-- Results Section -->
+            <div id="result" class="result"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Advanced Algorithms</h3>
+                    <p>Our checker uses state-of-the-art algorithms to detect even the slightest matches.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multi-Language Support</h3>
+                    <p>Supports multiple languages, ensuring accurate results for diverse content.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Detailed Reports</h3>
+                    <p>Get comprehensive reports with detailed analysis of plagiarism percentage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <ol>
+                <li>Paste your text into the input box above.</li>
+                <li>Click "Check for Plagiarism".</li>
+                <li>Receive a plagiarism report in seconds.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-item">
+                <p>"I loved how it's so easy to use!"</p>
+                <h4>- Sanjana. M.</h4>
+            </div>
+            <div class="testimonial-item">
+                <p>"Hassle-free and quite simple!"</p>
+                <h4>- Akhilesh. G.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 The ABSOLUTE Plagiarism Checker. All rights reserved.</p>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("plagiarism-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            const textarea = document.querySelector("textarea[name='text']");
+            const resultDiv = document.getElementById("result");
+
+            const formData = new FormData();
+            formData.append("text", textarea.value);
+
+            // Use fetch to send the data to the Flask backend
+            fetch("/check", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Show the result div
+                resultDiv.style.display = 'block';
+
+                // Determine if plagiarized and matches found
+                const isPlagiarized = data.originality_percentage < 75; // If originality percentage is less than 100, it's plagiarized
+                const matchesFound = data.matches_found ? "Yes" : "No"; // Assuming matches_found is a boolean
+                
+                // Display the result
+                resultDiv.innerHTML = `
+                    <h3>Plagiarism Report</h3>
+                    <p>Originality Percentage: ${data.originality_percentage !== undefined ? data.originality_percentage : "undefined"}%</p>
+                    <p>Plagiarized: ${isPlagiarized ? "Yes" : "No"}</p>
+                    <p>Matches Found: ${matchesFound}</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<p>Error checking for plagiarism. Please try again later.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
